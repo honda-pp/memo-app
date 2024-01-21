@@ -19,7 +19,9 @@ jobs:
           generator: go-gin-server
           generator-tag: latest
           openapi-file: api/memo-app-api.yml
-          command-args: -o backend-go-gin/generated --api-name-suffix memo-app-api --model-name-prefix memo-app --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: |
+          -o backend-go-gin/generated --api-name-suffix memo-app-api --model-name-prefix memo-app \
+          --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
