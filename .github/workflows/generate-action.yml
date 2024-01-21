@@ -12,18 +12,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: honda-pp/memo-app-backend-go-gin
-          path: generated
+          path: backend-go-gin
       - name: generate code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: go-gin-server
           generator-tag: latest
           openapi-file: api/memo-app-api.yml
-          command-args: -o generated
+          command-args: -o backend-go-gin/generated
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          path: generated
+          path: backend-go-gin
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commit-message: generate code from openapi yaml
           title: generate code from openapi yaml
