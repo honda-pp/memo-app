@@ -1,4 +1,4 @@
-apiNameSuffix: ${{ env.app_name }}-api
-modelNamePrefix: ${{ env.app_name }}
-gitUserId: ${{ GITHUB_REPOSITORY_OWNER }}
-gitRepoId: ${{ GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/ }}
+apiNameSuffix: ${env.app_name}-api
+modelNamePrefix: ${env.app_name}
+gitUserId: ${GITHUB_REPOSITORY_OWNER}
+gitRepoId: ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
