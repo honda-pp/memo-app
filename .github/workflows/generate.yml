@@ -17,7 +17,7 @@ jobs:
           repository: honda-pp/memo-app-backend-go-gin
           path: generated
       - name: generate code
-        uses: openapitools/openapi-generator-action@v1.0.0
+        uses: openapi-generators/openapitools-generator-action@v1
         with:
           path: memo-app.yml
           generator: go-gin-server
