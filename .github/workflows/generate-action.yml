@@ -21,7 +21,7 @@ jobs:
           generator: go-gin-server
           generator-tag: latest
           openapi-file: ${{ env.app_name }}-api.yml
-          command-args: -o ${{ env.app_name }}-backend-go-gin/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-rd ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o ${{ env.app_name }}-backend-go-gin/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
