@@ -13,19 +13,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: honda-pp/${{ app_name }}-backend-go-gin
-          path: ${{ app_name }}-backend-go-gin
+          repository: honda-pp/${{ env.app_name }}-backend-go-gin
+          path: ${{ env.app_name }}-backend-go-gin
       - name: generate code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: go-gin-server
           generator-tag: latest
-          openapi-file: ${{ app_name }}-api.yml
-          command-args: -c config.yml -o ${{ app_name }}-backend-go-gin/generated
+          openapi-file: ${{ env.app_name }}-api.yml
+          command-args: -c config.yml -o ${{ env.app_name }}-backend-go-gin/generated
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          path: ${{ app_name }}-backend-go-gin
+          path: ${{ env.app_name }}-backend-go-gin
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commit-message: generate code from openapi yaml
           title: generate code from openapi yaml
