@@ -3,7 +3,7 @@ name: generate code from openapi yaml
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - memo-app-api.yml
 env:
