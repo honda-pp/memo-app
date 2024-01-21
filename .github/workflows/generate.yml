@@ -14,7 +14,7 @@ jobs:
         with:
           repository: honda-pp/memo-app-backend-go-gin
           path: generated
-      - name ls
+      - name: ls
         with:
           run: ls -la && pwd && ls -la */*
       - name: generate code
