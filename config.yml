@@ -1,4 +1,4 @@
-apiNameSuffix: memo-app-api
-modelNamePrefix: memo-app
-gitUserOd: ${GITHUB_REPOSITORY_OWNER}
-gitRepoId: ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+apiNameSuffix: ${{ app_name }}-api
+modelNamePrefix: ${{ app_name }}
+gitUserId: ${{ GITHUB_REPOSITORY_OWNER }}
+gitRepoId: ${{ GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/ }}
