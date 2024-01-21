@@ -1,0 +1,40 @@
+name: generate code from openapi yaml
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - memo-app.yml
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: honda-pp/memo-app-backend-go-gin
+          path: generated
+      - name: generate code
+        uses: openapitools/openapi-generator-action@v1.0.0
+        with:
+          path: memo-app.yml
+          generator: go-gin-server
+          configOptions: 
+            packageName: memo-app
+            packageVersion: 1.0.0
+            hideGenerationTimestamp: true
+            apiPackage: api
+            modelPackage: model
+            serverPackage: server
+            gitUserId: honda-pp
+            gitRepoId: memo-app-backend-go-gin
+            gitHost: github.com
+            httpUserAgent: OpenAPI-Generator/1.0.0/go-gin-server
+            artifactId: memo-app-backend-go-gin
+            artifactVersion: 1.0.0
+            invokerPackage: memo-app
+            licenseName: MIT
+            licenseUrl: https://opensource.org/licenses/MIT
+            developerName: honda-pp
