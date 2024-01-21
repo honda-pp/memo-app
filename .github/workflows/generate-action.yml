@@ -24,7 +24,6 @@ jobs:
       - name: create pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           path: generated
           commit-message: generate code from openapi yaml
           title: generate code from openapi yaml
