@@ -4,7 +4,7 @@ info:
   description: API description in Markdown.
   version: 1.0.0
 servers:
-  - url: http://localhost/v1
+  - url: http://localhost:8000/
 tags:
   - name: users
     description: Operations about user
