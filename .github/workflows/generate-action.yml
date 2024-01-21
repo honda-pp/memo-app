@@ -1,0 +1,71 @@
+name: generate code from openapi yaml
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - memo-app-api.yml
+env:
+  app_name: memo-app
+  backend: backend-go-gin
+  backend_generator: go-gin-server
+  frontend: frontend-vuejs
+  frontend_generator: typescript-axios
+jobs:
+  generate-backend-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        name: checkout ${{ env.backend }}
+        with:
+          repository: honda-pp/${{ env.app_name }}-${{ env.backend }}
+          path: ${{ env.app_name }}-${{ env.backend }}
+      - name: generate ${{ env.backend }} code
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: ${{ env.backend_generator }}
+          generator-tag: latest
+          openapi-file: ${{ env.app_name }}-api.yml
+          command-args: -o ${{ env.app_name }}-${{ env.backend }}/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+      - name: create ${{ env.backend }} pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          path: ${{ env.app_name }}-${{ env.backend }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          commit-message: generate code from openapi yaml
+          title: generate code from openapi yaml
+          body: |
+            generate code from openapi yaml
+          branch: generate-code-from-openapi-yaml
+          branch-suffix: short-commit-hash
+          delete-branch: true
+  generate-frontend-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        name: checkout ${{ env.frontend }}
+        with:
+          repository: honda-pp/${{ env.app_name }}-${{ env.frontend }}
+          path: ${{ env.app_name }}-${{ env.frontend }}
+      - name: generate ${{ env.frontend }} code
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: ${{ env.frontend_generator }}
+          generator-tag: latest
+          openapi-file: ${{ env.app_name }}-api.yml
+          command-args: -o ${{ env.app_name }}-${{ env.frontend }}/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+      - name: create ${{ env.frontend}} pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          path: ${{ env.app_name }}-${{ env.frontend }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          commit-message: generate code from openapi yaml
+          title: generate code from openapi yaml
+          body: |
+            generate code from openapi yaml
+          branch: generate-code-from-openapi-yaml
+          branch-suffix: short-commit-hash
+          delete-branch: true
