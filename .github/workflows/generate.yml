@@ -21,5 +21,4 @@ jobs:
         with:
           generator: go-gin-server
           generator-tag: latest
-          command-args: |
-          -i memo-app.yml -g go-gin-server -o generated
+          command-args: -i memo-app.yml -g go-gin-server -o generated
