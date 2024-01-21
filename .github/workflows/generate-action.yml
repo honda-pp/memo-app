@@ -1,0 +1,37 @@
+name: generate code from openapi yaml
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: honda-pp/memo-app-backend-go-gin
+          path: generated
+      - name: ls
+        run: ls -la && pwd && ls -la */*
+      - name: generate code
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: go-gin-server
+          generator-tag: latest
+          openapi-file: api/memo-app.yml
+          command-args: -o generated
+      - name: ls
+        run: ls -la && pwd && ls -la */*
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: generate code from openapi yaml
+          title: generate code from openapi yaml
+          body: |
+            generate code from openapi yaml
+          branch: generate-code-from-openapi-yaml
+          branch-suffix: short-commit-hash
+          delete-branch: true
