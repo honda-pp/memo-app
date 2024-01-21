@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'api/**.yml'
 
 jobs:
   generate:
@@ -16,6 +14,8 @@ jobs:
         with:
           repository: honda-pp/memo-app-backend-go-gin
           path: generated
+      - name ls
+        run: ls -la && pwd && ls -la */*
       - name: generate code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
