@@ -5,7 +5,7 @@ on:
     branches:
       - [ "develop" ]
     paths:
-      - memo-app.yml
+      - "memo-app.yml"
 
 jobs:
   generate:
