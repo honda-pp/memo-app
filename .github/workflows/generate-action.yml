@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - memo-app-api.yml
+      - openapi/memo-app-api.yml
 env:
   app_name: memo-app
   backend: backend-go-gin
@@ -27,8 +27,8 @@ jobs:
         with:
           generator: ${{ env.backend_generator }}
           generator-tag: latest
-          openapi-file: ${{ env.app_name }}-api.yml
-          command-args: -o ${{ env.app_name }}-${{ env.backend }}/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          openapi-file: openapi/${{ env.app_name }}-api.yml
+          command-args: -o ${{ env.app_name }}-${{ env.backend }}/generated --template-dir openapi/${{ env.backend_generator }} --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.backend }} pull request
         uses: peter-evans/create-pull-request@v5
         with:
@@ -55,7 +55,7 @@ jobs:
         with:
           generator: ${{ env.frontend_generator }}
           generator-tag: latest
-          openapi-file: ${{ env.app_name }}-api.yml
+          openapi-file: openapi/${{ env.app_name }}-api.yml
           command-args: -o ${{ env.app_name }}-${{ env.frontend }}/generated --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.frontend}} pull request
         uses: peter-evans/create-pull-request@v5
