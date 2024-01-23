@@ -48,10 +48,16 @@ func DefaultHandleFunc(c *gin.Context) {
 	c.String(http.StatusNotImplemented, "501 not implemented")
 }
 
+func NewApiHandleFunctions({{#apiInfo}}{{#apis}}{{classname}}Interface {{classname}}Interface{{/apis}}{{/apiInfo}}) ApiHandleFunctions {
+	return ApiHandleFunctions{
+		{{#apiInfo}}{{#apis}}{{classname}}: {{classname}}{{/apis}}{{/apiInfo}}Interface,
+	}
+}
+
 type ApiHandleFunctions struct {
 {{#apiInfo}}{{#apis}}{{#operations}}
 	// Routes for the {{classname}} part of the API
-	{{classname}} {{classname}}{{/operations}}{{/apis}}{{/apiInfo}}{{#webhooks}}{{#operations}}
+	{{classname}} {{classname}}Interface{{/operations}}{{/apis}}{{/apiInfo}}{{#webhooks}}{{#operations}}
 	{{classname}} {{classname}}{{/operations}}{{/webhooks}}
 }
 
