@@ -35,7 +35,7 @@ paths:
         - users
       operationId: getUserById
       summary: Find user by ID
-      description: Returns a single user
+      description: Returns a single user.
       parameters:
         - name: id
           in: path
