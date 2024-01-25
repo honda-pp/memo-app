@@ -107,6 +107,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - memo
+      operationId: deleteMemoById
+      summary: Delete memo by ID
+      description: Delete a single memo.
+      parameters:
+        - name: id
+          in: path
+          description: ID of memo to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Memo'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Error:
