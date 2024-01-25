@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:16-alpine
+    ports:
+      - ${db_port}:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=${db_password}
+      - POSTGRES_USER=${db_user}
+      - POSTGRES_DB=${db_name}
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile_dev
+    ports:
+      - ${backend_port}:8000
+    volumes:
+      - ./backend:/app
+    environment:
+      - DB_HOST=${db_host}
+      - DB_PORT=${db_port}
+      - DB_USER=${db_user}
+      - DB_PASSWORD=${db_password}
+      - DB_NAME=${db_name}
+    command: ["air"]
+
+volumes:
+  db-data:
+  node_modules:
