@@ -7,9 +7,8 @@ CREATE TABLE memo (
     id INT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL
 );
-
 
 INSERT INTO users (id, name) VALUES
  (1, 'John'),
