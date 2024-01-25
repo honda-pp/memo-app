@@ -28,7 +28,7 @@ jobs:
           generator: ${{ env.backend_generator }}
           generator-tag: latest
           openapi-file: openapi/${{ env.app_name }}-api.yml
-          command-args: -o ${{ env.app_name }}-${{ env.backend }} --template-dir openapi/${{ env.backend_generator }} --api-name-suffix ${{ env.app_name }}-api --model-name-prefix ${{ env.app_name }} --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o ${{ env.app_name }}-${{ env.backend }} --template-dir openapi/${{ env.backend_generator }} --api-name-suffix handler --package-name generated --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.backend }} pull request
         uses: peter-evans/create-pull-request@v5
         with:
