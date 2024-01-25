@@ -48,9 +48,10 @@ func DefaultHandleFunc(c *gin.Context) {
 	c.String(http.StatusNotImplemented, "501 not implemented")
 }
 
-func NewApiHandleFunctions({{#apiInfo}}{{#apis}}{{classname}}Interface {{classname}}Interface{{/apis}}{{/apiInfo}}) ApiHandleFunctions {
+func NewApiHandleFunctions({{#apiInfo}}{{#apis}}{{classname}}Interface {{classname}}Interface, {{/apis}}{{/apiInfo}}) ApiHandleFunctions {
 	return ApiHandleFunctions{
-		{{#apiInfo}}{{#apis}}{{classname}}: {{classname}}Interface,{{/apis}}{{/apiInfo}}
+		{{#apiInfo}}{{#apis}}{{classname}}: {{classname}}Interface,
+		{{/apis}}{{/apiInfo}}
 	}
 }
 
