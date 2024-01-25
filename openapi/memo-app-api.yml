@@ -8,6 +8,8 @@ servers:
 tags:
   - name: users
     description: Operations about user.
+  - name: memo
+    description: Operations about memo.
 paths:
   /users:
     get:
@@ -57,6 +59,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /memo-list:
+    get:
+      tags:
+        - memo
+      operationId: getMemoList
+      summary: Returns a list of memos.
+      description: Optional extended description in Markdown.
+      responses:
+        '200':
+          description: A JSON array of memo.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Memos'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /memo/{id}:
+    get:
+      tags:
+        - memo
+      operationId: getMemoById
+      summary: Find memo by ID
+      description: Returns a single memo.
+      parameters:
+        - name: id
+          in: path
+          description: ID of memo to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Memo'
+        default:
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Error:
@@ -94,3 +144,39 @@ components:
           name: user1
         - id: 2
           name: user2
+    Memo:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - user_id
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        content:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+      example:
+        id: 1
+        title: memo1
+        content: memo1 content
+        user_id: 1
+    Memos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Memo'
+      example:
+        - id: 1
+          title: memo1
+          content: memo1 content
+          user_id: 1
+        - id: 2
+          title: memo2
+          content: memo2 content
+          user_id: 1
