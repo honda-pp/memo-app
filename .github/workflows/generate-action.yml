@@ -21,18 +21,18 @@ jobs:
         name: checkout ${{ env.backend }}
         with:
           repository: honda-pp/${{ env.app_name }}-${{ env.backend }}
-          path: backcend
+          path: backend
       - name: generate ${{ env.backend }} code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: ${{ env.backend_generator }}
           generator-tag: latest
           openapi-file: openapi/${{ env.app_name }}-api.yml
-          command-args: -o backcend --template-dir openapi/${{ env.backend_generator }} --api-name-suffix handler --package-name generated --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o backend --template-dir openapi/${{ env.backend_generator }} --api-name-suffix handler --package-name generated --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.backend }} pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          path: ${{ env.app_name }}-${{ env.backend }}
+          path: backend
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commit-message: generate code from openapi yaml
           title: generate code from openapi yaml
@@ -60,7 +60,7 @@ jobs:
       - name: create ${{ env.frontend}} pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          path: ${{ env.app_name }}-${{ env.frontend }}
+          path: frontend
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commit-message: generate code from openapi yaml
           title: generate code from openapi yaml
