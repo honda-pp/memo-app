@@ -70,7 +70,7 @@ paths:
     get:
       tags:
         - users
-      operationId: getUsers
+      operationId: getUserList
       summary: Returns a list of users.
       description: Optional extended description in Markdown.
       responses:
