@@ -1,5 +1,8 @@
 # memo-app-openapi
 
+- [frontend repository](https://github.com/honda-pp/memo-app-frontend-vuejs)
+- [backend repository](https://github.com/honda-pp/memo-app-backend-go-gin)
+
 ## setup
 
 ```
