@@ -6,12 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type {{classname}}Interface interface {
-	{{#operation}}
-	{{nickname}}(c *gin.Context)
-	{{/operation}}
-}
-
 func New{{classname}}() {{classname}}Interface {
 	return &{{classname}}{}
 }
