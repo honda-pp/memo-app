@@ -21,14 +21,14 @@ jobs:
         name: checkout ${{ env.backend }}
         with:
           repository: honda-pp/${{ env.app_name }}-${{ env.backend }}
-          path: ${{ env.app_name }}-${{ env.backend }}
+          path: backcend
       - name: generate ${{ env.backend }} code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: ${{ env.backend_generator }}
           generator-tag: latest
           openapi-file: openapi/${{ env.app_name }}-api.yml
-          command-args: -o ${{ env.app_name }}-${{ env.backend }} --template-dir openapi/${{ env.backend_generator }} --api-name-suffix handler --package-name generated --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o backcend --template-dir openapi/${{ env.backend_generator }} --api-name-suffix handler --package-name generated --additional-properties apiPath=generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.backend }} pull request
         uses: peter-evans/create-pull-request@v5
         with:
@@ -49,14 +49,14 @@ jobs:
         name: checkout ${{ env.frontend }}
         with:
           repository: honda-pp/${{ env.app_name }}-${{ env.frontend }}
-          path: ${{ env.app_name }}-${{ env.frontend }}
+          path: frontend
       - name: generate ${{ env.frontend }} code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: ${{ env.frontend_generator }}
           generator-tag: latest
           openapi-file: openapi/${{ env.app_name }}-api.yml
-          command-args: -o ${{ env.app_name }}-${{ env.frontend }}/generated --api-name-suffix handler --package-name generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o frontend/generated --api-name-suffix handler --package-name generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.frontend}} pull request
         uses: peter-evans/create-pull-request@v5
         with:
