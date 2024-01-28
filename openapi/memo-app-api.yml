@@ -11,6 +11,33 @@ tags:
   - name: memo
     description: Operations about memo.
 paths:
+  /user:
+    post:
+      tags:
+        - users
+      operationId: createUser
+      summary: Create a new user
+      description: Creates a new user.
+      requestBody:
+        description: User object that needs to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /user/{id}:
     get:
       tags:
