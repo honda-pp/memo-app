@@ -49,7 +49,7 @@ jobs:
         name: checkout ${{ env.frontend }}
         with:
           repository: honda-pp/${{ env.app_name }}-${{ env.frontend }}
-          path: frontend
+          path: frontend/src
       - name: generate ${{ env.frontend }} code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
