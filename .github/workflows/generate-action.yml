@@ -49,14 +49,14 @@ jobs:
         name: checkout ${{ env.frontend }}
         with:
           repository: honda-pp/${{ env.app_name }}-${{ env.frontend }}
-          path: frontend/src
+          path: frontend
       - name: generate ${{ env.frontend }} code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: ${{ env.frontend_generator }}
           generator-tag: latest
           openapi-file: openapi/${{ env.app_name }}-api.yml
-          command-args: -o frontend/generated --api-name-suffix handler --package-name generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+          command-args: -o frontend/src/generated --api-name-suffix handler --package-name generated --git-user-id ${GITHUB_REPOSITORY_OWNER} --git-repo-id ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
       - name: create ${{ env.frontend}} pull request
         uses: peter-evans/create-pull-request@v5
         with:
