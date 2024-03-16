@@ -27,6 +27,8 @@ services:
       - DB_PASSWORD=${db_password}
       - DB_NAME=${db_name}
     command: ["air"]
+    depends_on:
+      - database
   frontend:
     build: 
       context: ./frontend
