@@ -6,6 +6,8 @@
 ## setup
 
 ```
+git clone git@github.com:honda-pp/memo-app.git
+cd memo-app
 git clone git@github.com:honda-pp/memo-app-backend-go-gin.git backend
 git clone git@github.com:honda-pp/memo-app-frontend-vuejs.git frontend
 ```
