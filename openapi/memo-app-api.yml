@@ -312,13 +312,18 @@ components:
     MemoList:
       type: array
       items:
-        $ref: '#/components/schemas/Memo'
+        type: object
+        required:
+          - id
+          - title
+        properties:
+          id:
+            type: integer
+            format: int64
+          title:
+            type: string
       example:
         - id: 1
           title: memo1
-          content: memo1 content
-          user_id: 1
         - id: 2
           title: memo2
-          content: memo2 content
-          user_id: 1
