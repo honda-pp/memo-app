@@ -238,18 +238,17 @@ paths:
       description: Optional extended description in Markdown.
       requestBody:
         description: get current user's memo list.
-        requestBody:
-          required: false
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user_id:
-                    type: integer
-                    format: int64
-                example:
-                  user_id: 1
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  format: int64
+              example:
+                user_id: 1
       responses:
         '200':
           description: A JSON array of memo.
